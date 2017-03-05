@@ -71,8 +71,8 @@ I verified that my perspective transform was working as expected by drawing the 
 ##### Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 In order to find the lane pixels I used a function find_window_centroids().  Within this function I use a convolution to identify the highest concentration of pixels in the lower part of the image.  Once the pixels are found, the window can shift around on the next level to the left or right in order to find the rest of the line.  For this function I used a window height of 120px which allows for 6 levels (top to bottom). I originally started with a height of 80px, allowing for 9 windows.  However I found with window sizes that small, sometimes it would lose the right dashed line when there was a break in the line.  Allowing for larger windows allowed it to find the lines much easier.  I chose a window width of 25, and this worked consistently throughout my testing. 
-<img src="readMeImages/windows.jpg" width="480" /> 
 
+<img src="readMeImages/windows.jpg" width="480" /> 
 
 ##### Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 In order to calculate the radius of the curve I implemented a function, DetermineCurve().  The first thing this function does is translate pixel space into real world space, using a ratio on the x axis of .005286 meters per pixel (3.7/700). From there it takes the lines we found in the find_window_centroids() function and create a distinct left and right line. In my pipeline I also calculated the position of the vehicle in respect to the center of the lane.  
@@ -85,10 +85,12 @@ The final image is a composite of the original undistorted image with the region
 
 
 Original Image with the region of the lanes drawn.
-<img src="readMeImages/region.jpg" width="480" /> 
-Final Composite image.
-<img src="readMeImages/final.jpg" width="480" /> 
 
+<img src="readMeImages/region.jpg" width="480" /> 
+
+Final Composite image.
+
+<img src="readMeImages/final.jpg" width="480" /> 
 
 ## Pipeline (video)
 ##### Provide a link to your final video output. Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
